@@ -20,3 +20,14 @@ Run each section independently in the order they are provided. The main function
 * **fftd_decomposition.m** - FFT decomposition technique to determine the distribution of slip bands in very grain. This distribution is counted along lines that cross the centre of the grains perpendicular to the slip bands. The **fftd_decomposition_plots.m** can be used to generate relevant plots of this process for selected grains.
 * **fftd_analysis_orientation.m** - function to optimise the EBSD orientation by minimising the difference between the trace angles predicted via EBSD and FFT decomposition.
 * **fftd_analysis_counts.m** - function to calculate true slip band spacings and planar strains, numbers of grains, active slip planes, slip bands and slip band spacings counted.
+
+## Example
+The following image exemplifies the use of the technique in a Ni-based superalloy. The HR-DIC map of a grain is decomposed into two different images, each with the slip bands traces that share an individual orientation.
+
+<img src="./Images/FFTD.JPG" height="750">
+
+This allows for the quantification of slip band spacings and in-plane shear strains. The following histograms were obtained from 6557 slip bands detected over 365 grains.
+
+<img src="./Images/histograms.JPG" height="300">
+
+More information can be found in the original publication.
