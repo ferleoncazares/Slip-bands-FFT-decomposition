@@ -36,12 +36,15 @@ end
 
 function [thdiffR] = m_EBSD_thdiffR(grains,ss,thSB,R)
     
-    ssg = grains.meanOrientation * ss;                  % Slip systems for each grain
-    ssgR = rotate(ssg ,rotation('axis',vector3d.X,'angle',R(1)*degree));    % ROTATIONS
-    ssgR = rotate(ssgR,rotation('axis',vector3d.Y,'angle',R(2)*degree));
-    ssgR = rotate(ssgR,rotation('axis',vector3d.Z,'angle',R(3)*degree));
+    ssgE = grains.meanOrientation * ss;                 % Slip systems for each grain
     
-    trEBSD = trace(ssgR(:,[1,4,7,10]));                 % Traces of all slip planes
+    Rm = rotation('axis',vector3d.Z,'angle',R(3)*degree) .* ...         % ROTATIONS in order A' = RmA = RzRxRzA
+         rotation('axis',vector3d.X,'angle',R(2)*degree) .* ...
+         rotation('axis',vector3d.Z,'angle',R(1)*degree);
+
+    ssg = Rm .* ssgE;                                   % Slip systems in rotated coordinate system
+    
+    trEBSD = trace(ssg(:,[1,4,7,10]));                  % Traces of all slip planes
     thEBSD = atand(trEBSD(:,:).y./trEBSD(:,:).x);       % Angles of slip traces
     
     [~,~,thdiffR] = thetadifference(thEBSD,thSB,0);     % Matrix with thSB - thEBSD

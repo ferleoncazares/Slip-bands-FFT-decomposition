@@ -128,7 +128,7 @@ fileS = 'results_postanalysis.mat';     % Name of the save file
 dispP = 'ols';                          % Plots (o -> orientations, l -> slip band spacings, s -> slip band strains)
 
 % Running analysis
-[thEBSD,nzEBSD,zgEBSD,mSspEBSD,nLEBSD,thdiff,meanthdiff,thflag,thdiffr,zgEBSD0] = ...     % Orientation analysis
+[thEBSD,nzEBSD,zgEBSD,mSspEBSD,MSspEBSD,nLEBSD,thdiff,meanthdiff,thflag,thdiffr,zgEBSD0] = ...     % Orientation analysis
        fftd_analysis_orientation(ebsd,grains,gsbl,LO,thSB,thth,thflagad);
 
 for i = 1:size(thflag,1)                % Removing outliers (thflag) from each variable

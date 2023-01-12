@@ -26,6 +26,7 @@
 % nzEBSD        z-component of octahedral plane unit normals in optimised EBSD
 % zgEBSD        Crystallographic direction in-and-out of sample surface in optimised EBSD
 % mSspEBSD      Schmid factors of octahedral planes in optimised EBSD
+% MSspEBSD      Taylor factors for strain tensor diag([1,-1/3,-1/3]) in rotated EBSD
 % nLEBSD        Loading direction (crystallographic orientation) in optimised EBSD
 % thdiff        Differences between slip band angles in optimised EBSD and FFT decomposition
 % meanthdiff    Mean thdiff angle difference
@@ -38,7 +39,7 @@
 % https://www.researchgate.net/profile/Fernando-Daniel-Leon-Cazares
 %
 
-function [thEBSD,nzEBSD,zgEBSD,mSspEBSD,nLEBSD,thdiff,meanthdiff,thflag,thdiffr,zgEBSD0] = ...
+function [thEBSD,nzEBSD,zgEBSD,mSspEBSD,MSspEBSD,nLEBSD,thdiff,meanthdiff,thflag,thdiffr,zgEBSD0] = ...
          fftd_analysis_orientation(ebsd,grains,gsbl,LO,thSB,thth,thflagad)
 
 disp('Orientation analysis...')
@@ -48,12 +49,12 @@ grainsbl = grains(gsbl);                % Data for surviving grains
 ebsdbl = ebsd(grainsbl);
 
 % Before optimising
-[~,thEBSD0,~,zgEBSD0,~,~] = m_EBSD_gdataR(ebsdbl,grainsbl,LO,[0,0,0]);      % Traces, z-vector and Schmid factors
+[~,thEBSD0,~,zgEBSD0,~,~,~] = m_EBSD_gdataR(ebsdbl,grainsbl,LO,[0,0,0],0);  % Traces, z-vector and Schmid factors
 [~,~,meanthdiff0,~] = thetadifference(thEBSD0,thSB,thth);                   % Differences in DIC and not optimised EBSD angles
 
 % Optimised
 Ro = m_EBSD_matchingtraces(ebsdbl,grainsbl,thSB);                           % Optimal rotation operations  
-[~,thEBSDo,~,~,~,~] = m_EBSD_gdataR(ebsdbl,grainsbl,LO,Ro);                 % Repeat operations
+[~,thEBSDo,~,~,~,~,~] = m_EBSD_gdataR(ebsdbl,grainsbl,LO,Ro,0);             % Repeat operations
 [~,~,meanthdiffo,thflag,~] = thetadifference(thEBSDo,thSB,thth);
 thflag = [thflag;thflagad];
 
@@ -66,7 +67,7 @@ end
 
 % Optimised + outliers removed
 R = m_EBSD_matchingtraces(ebsdbl,grainsbl,thSBo);                                   % Optimal rotation operations
-[trEBSD,thEBSD,nzEBSD,zgEBSD,mSspEBSD,nLEBSD] = m_EBSD_gdataR(ebsdbl,grainsbl,LO,R);% Repeat operations
+[trEBSD,thEBSD,nzEBSD,zgEBSD,mSspEBSD,MSspEBSD,nLEBSD] = m_EBSD_gdataR(ebsdbl,grainsbl,LO,R,1);  % Repeat operations and calculate Taylor factors
 [thEBSD,thdiff,meanthdiff,~,ord] = thetadifference(thEBSD,thSBo,thth);
 for i = 1:size(thdiff,1)                                                            % Rearranging to match the order in thSB
     trEBSD(i,:) = trEBSD(i,ord(i,:));
