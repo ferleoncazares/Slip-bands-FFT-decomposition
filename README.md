@@ -3,6 +3,8 @@ Fast Fourier transform (FFT) decomposition to isolate and quantify the distribut
 
 The derivation and further details of this work have been published in: [F.D. León-Cázares, B. Rowlands, E.I. Galindo-Nava. Microscopy and Microanalysis, 00 (2023) 1-16](https://academic.oup.com/mam/advance-article/doi/10.1093/micmic/ozad002/7001843). Please cite this publication if you benefit from this repository.
 
+[![View Slip-bands-FFT-decomposition on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/124055-slip-bands-fft-decomposition)
+
 ## Requirements
 Coded in Matlab R2021a with the image processing toolbox, signal processing toolbox and MTex toolbox (version 5.1.0).
 
