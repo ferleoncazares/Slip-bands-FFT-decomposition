@@ -1,6 +1,8 @@
 # Slip-bands-FFT-decompostion
 Fast Fourier transform (FFT) decomposition to isolate and quantify the distribution of slip bands in a polycrystal from high resolution digitial image correlation (HR-DIC) and electron backscatter diffraction (EBSD) datasets. Other types of micrographs could be employed as long as slip bands are discernible.
 
+The derivation and further details of this work have been published in: [F.D. León-Cázares, B. Rowlands, E.I. Galindo-Nava. Microscopy and Microanalysis, 00 (2023) 1-16](https://academic.oup.com/mam/advance-article/doi/10.1093/micmic/ozad002/7001843). Please cite this publication if you benefit from this repository.
+
 ## Requirements
 Coded in Matlab R2021a with the image processing toolbox, signal processing toolbox and MTex toolbox (version 5.1.0).
 
